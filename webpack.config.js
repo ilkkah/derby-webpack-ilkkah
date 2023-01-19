@@ -43,20 +43,20 @@ module.exports = (webpack, apps, rootDir) => ({
     publicPath: '/',
   },
   devtool: 'source-map',
-  // module: {
-  //   rules: [
-  //     {
-  //       test: /\.ts$/,
-  //       use: 'ts-loader',
-  //       exclude: /node_modules/,
-  //     },
-  //     {
-  //       test: /\.coffee$/,
-  //       loader: "coffee-loader",
-  //       exclude: /node_modules/,
-  //     },
-  //   ],
-  // },
+  module: {
+    rules: [
+      // {
+      //   test: /\.ts$/,
+      //   use: 'ts-loader',
+      //   exclude: /node_modules/,
+      // },
+      // {
+      //   test: /\.coffee$/,
+      //   loader: "coffee-loader",
+      //   exclude: /node_modules/,
+      // },
+    ],
+  },
   plugins: [
     // order matters
     // provide plugin before hot module replacement
