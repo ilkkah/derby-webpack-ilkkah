@@ -5,7 +5,6 @@ const path = require('path');
 
 const DerbyViewsPlugin = require('./lib/DerbyViewPlugin');
 
-
 module.exports = (webpack, apps, rootDir) => ({
   mode: 'development',
   entry: Object.entries(apps).reduce((acc, [name, path]) => ({
@@ -44,18 +43,7 @@ module.exports = (webpack, apps, rootDir) => ({
   },
   devtool: 'source-map',
   module: {
-    rules: [
-      // {
-      //   test: /\.ts$/,
-      //   use: 'ts-loader',
-      //   exclude: /node_modules/,
-      // },
-      // {
-      //   test: /\.coffee$/,
-      //   loader: "coffee-loader",
-      //   exclude: /node_modules/,
-      // },
-    ],
+    rules: [],
   },
   plugins: [
     // order matters
