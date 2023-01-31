@@ -65,7 +65,7 @@ module.exports = (webpack, apps, rootDir, options = {}) => ({
     new WebpackDeduplicationPlugin({}),
     new DerbyViewsPlugin(apps),
     new WebpackManifestPlugin({ writeToFileEmit: true }),
-  ].map(Boolean)),
+  ].filter(Boolean)),
   resolve: {
     extensions: ['...', '.coffee', '.ts'], // .coffee and .ts last so .js files in node_modules get precedence
     fallback: {
