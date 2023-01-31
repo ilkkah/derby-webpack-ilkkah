@@ -5,7 +5,7 @@ const path = require('path');
 
 const DerbyViewsPlugin = require('./lib/DerbyViewPlugin');
 
-module.exports = (webpack, apps, rootDir) => ({
+module.exports = (webpack, apps, rootDir, options) => ({
   mode: 'development',
   entry: Object.entries(apps).reduce((acc, [name, path]) => ({
     ...acc,
@@ -45,7 +45,7 @@ module.exports = (webpack, apps, rootDir) => ({
   module: {
     rules: [],
   },
-  plugins: [
+  plugins: ([
     // order matters
     // provide plugin before hot module replacement
     // to ensure polyfills can be applied
@@ -53,10 +53,10 @@ module.exports = (webpack, apps, rootDir) => ({
       process: 'process/browser',
       Buffer: ['buffer', 'Buffer'],
     }),
-    new webpack.HotModuleReplacementPlugin(),
+    options.hotModuleReplacement ? new webpack.HotModuleReplacementPlugin() : undefined,
     new webpack.DefinePlugin({
       'process.title': JSON.stringify('browser'),
-      'DERBY_BUNDLED_AT': (new Date()).toISOString(),
+      'DERBY_BUNDLED_AT': JSON.stringify((new Date()).valueOf().toString()),
       'DERBY_SCRIPT_HASH': 'm4gic_h4$h',
       'process.browser': true,
       'process.env.LEVER_NGROK_ID': 0,
@@ -65,7 +65,7 @@ module.exports = (webpack, apps, rootDir) => ({
     new WebpackDeduplicationPlugin({}),
     new DerbyViewsPlugin(apps),
     new WebpackManifestPlugin({ writeToFileEmit: true }),
-  ],
+  ].map(Boolean)),
   resolve: {
     extensions: ['...', '.coffee', '.ts'], // .coffee and .ts last so .js files in node_modules get precedence
     fallback: {
