@@ -5,7 +5,7 @@ const path = require('path');
 
 const DerbyViewsPlugin = require('./lib/DerbyViewPlugin');
 
-module.exports = (webpack, apps, rootDir, options) => ({
+module.exports = (webpack, apps, rootDir, options = {}) => ({
   mode: 'development',
   entry: Object.entries(apps).reduce((acc, [name, path]) => ({
     ...acc,
