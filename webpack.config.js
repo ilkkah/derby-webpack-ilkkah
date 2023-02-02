@@ -9,10 +9,10 @@ module.exports = (webpack, apps, rootDir, options = {}) => ({
   mode: 'development',
   entry: Object.entries(apps).reduce((acc, [name, path]) => ({
     ...acc,
-    [name]: [
+    [name]: options.hotModuleReplacement ? [
       'webpack-hot-middleware/client',
       path,
-    ],
+    ] : [ path ],
   }), {}),
   node: {
     __dirname: true,
