@@ -26,6 +26,15 @@ module.exports = (webpack, apps, rootDir, options = {}) => ({
     runtimeChunk: 'single',
     splitChunks: {
       cacheGroups: {
+        ...(Object.entries(apps).reduce((acc, [name]) => ({
+          ...acc,
+          [`${name}_views`]: {
+            test: new RegExp(`[\\/]node_modules[\\/]derby[\\/]lib[\\/]${name}__views.js`),
+            name: `${name}_views`,
+            chunks: 'all',
+            priority: 20,
+          }
+        }), {})),
         vendor: {
           test: /[\\/]node_modules[\\/]/,
           name: 'vendors',

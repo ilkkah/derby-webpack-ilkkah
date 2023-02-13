@@ -6,15 +6,15 @@ const webpackConfig = require('./webpack.config');
 
 function derbyWebpack(apps, rootDir) {
   const config = () => webpackConfig(webpack, apps, rootDir);
-  const resovledConfig = config();
-  const compiler = webpack(resovledConfig);
 
+  const hmrConfig = webpackConfig(webpack, apps, rootDir, {hotModuleReplacement: true});
+  const compiler = webpack(hmrConfig);
   const hotReloadMiddleware = () => webpackHotMiddleware(webpackCompiler);
 
   const devMiddleware = () => webpackMiddleware(compiler, {
     serverSideRender: true,
     index: false,
-    publicPath: resovledConfig.output.publicPath,
+    publicPath: hmrConfig.output.publicPath,
   });
 
   return {
