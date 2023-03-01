@@ -65,7 +65,6 @@ module.exports = (webpack, apps, rootDir, options = {}) => ({
     options.hotModuleReplacement ? new webpack.HotModuleReplacementPlugin() : undefined,
     new webpack.DefinePlugin({
       'process.title': JSON.stringify('browser'),
-      'process.env.DERBY_BUNDLED_AT': JSON.stringify((new Date()).valueOf().toString()),
       'process.env.DERBY_HASH': JSON.stringify(process.env.DERBY_HASH || 'd3rby-h4$h'),
       'process.browser': true,
       'process.env.LEVER_NGROK_ID': 0,
