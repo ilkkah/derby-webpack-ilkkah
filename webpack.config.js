@@ -67,7 +67,6 @@ module.exports = (webpack, apps, rootDir, options = {}) => ({
       'process.title': JSON.stringify('browser'),
       'process.env.DERBY_HASH': JSON.stringify(process.env.DERBY_HASH || 'd3rby-h4$h'),
       'process.browser': true,
-      'process.env.LEVER_NGROK_ID': 0,
       'process.env.DEBUG_MIME': false,
     }),
     new WebpackDeduplicationPlugin({}),
@@ -82,7 +81,6 @@ module.exports = (webpack, apps, rootDir, options = {}) => ({
       path: require.resolve('path-browserify'),
       process: require.resolve('process/browser'),
       racer: require.resolve('racer'),
-      // below added for admin2
       // trailing slash required to indicate to lookup algorithm that this is not node core lib
       buffer: require.resolve('buffer/'),
       crypto: require.resolve('crypto-browserify'),
