@@ -1,6 +1,6 @@
 {
   "name": "@derbyjs/derby-webpack",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Webpack based builder for Derby apps",
   "repository": {
     "type": "git",
