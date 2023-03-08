@@ -53,9 +53,9 @@ module.exports = function(webpack, apps, rootDir, opts = {}) {
     output: {
       filename: '[name]-[contenthash].js',
       chunkFilename: '[id]-[chunkhash].js',
-      path: path.resolve(rootDir, 'public'),
-      clean: false,
-      publicPath: '/',
+      clean: true,
+      path: path.resolve(rootDir, './public/derby'),
+      publicPath: '/derby',
     },
     devtool: 'source-map',
     module: {
@@ -78,7 +78,10 @@ module.exports = function(webpack, apps, rootDir, opts = {}) {
       }),
       new WebpackDeduplicationPlugin({}),
       new DerbyViewsPlugin(apps),
-      new WebpackManifestPlugin({ writeToFileEmit: true }),
+      new WebpackManifestPlugin({
+        writeToFileEmit: true,
+        fileName: path.resolve(rootDir, './public/manifest.json'),
+      }),
     ].filter(Boolean)),
     resolve: {
       extensions: ['...', '.coffee', '.ts'], // .coffee and .ts last so .js files in node_modules get precedence
