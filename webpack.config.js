@@ -55,7 +55,7 @@ module.exports = function(webpack, apps, rootDir, opts = {}) {
       chunkFilename: '[id]-[chunkhash].js',
       clean: true,
       path: path.resolve(rootDir, './public/derby'),
-      publicPath: '/derby',
+      publicPath: '/derby/',
     },
     devtool: 'source-map',
     module: {
