@@ -7,6 +7,15 @@ const webpackConfig = require('./webpack.config');
 function derbyWebpack(apps, rootDir, options) {
   const config = () => webpackConfig(webpack, apps, rootDir, options);
 
+  // TODO:
+  // 1. Split out a separate function for getting the base config.
+  // 2. If the hotReloadMiddleware and devMiddleware are always used together
+  //    and with the same config, then have one function that, given the config,
+  //    returns them both together with a single underlying compiler, instead
+  //    needing the cachedCompiler stuff.
+  // Both of those would be breaking changes and necessitate a major version,
+  // unless we first add them as separate functions in a minor version, then
+  // remove the current one in a major version.
   let compilerInstance;
   function compiler(resolvedConfig) {
     compilerInstance = compilerInstance ?? webpack(resolvedConfig);
