@@ -57,6 +57,7 @@ module.exports = function(webpack, apps, rootDir, opts = {}) {
       path: path.resolve(rootDir, './public/derby'),
       publicPath: '/derby/',
     },
+    // @TODO: evaluate other options for performance/precision for dev and static build
     devtool: 'source-map',
     module: {
       rules: [],
