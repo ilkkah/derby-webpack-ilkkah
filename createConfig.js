@@ -2,10 +2,11 @@
 const { WebpackDeduplicationPlugin } = require('webpack-deduplication-plugin');
 const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
 const path = require('path');
+const webpack = require('webpack');
 
 const DerbyViewsPlugin = require('./lib/DerbyViewPlugin');
 
-module.exports = function(webpack, apps, rootDir, opts = {}) {
+module.exports = function createConfig(apps, rootDir, opts = {}) {
   const options = {
     hotModuleReplacement: false,
     defines: {},

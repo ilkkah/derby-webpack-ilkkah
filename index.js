@@ -7,13 +7,13 @@ const webpackHotMiddleware = require("webpack-hot-middleware");
  *
  * @param {webpack.Configuration} webpackConfig
  */
-exports.createWebpackCompiler = function getMiddleware(webpackConfig) {
+exports.createMiddleware = function createMiddleware(webpackConfig) {
   const webpackCompiler = webpack(webpackConfig);
 
   const devMiddleware = webpackMiddleware(webpackCompiler, {
     serverSideRender: true,
     index: false,
-    publicPath: resolvedConfig.output.publicPath,
+    publicPath: webpackConfig.output.publicPath,
     headers: (req, res, _context) => {
       const origin = req.headers['origin'];
       if (!origin) return;
