@@ -1,6 +1,8 @@
 const webpack = require("webpack");
 const webpackMiddleware = require("webpack-dev-middleware");
 const webpackHotMiddleware = require("webpack-hot-middleware");
+const reloader = require('./lib/reloader');
+const createWatcher = require('./lib/FileWatcher');
 
 /**
  * Creates a webpack compiler, plus associated dev and hot reload middleware.
@@ -25,3 +27,6 @@ exports.createMiddleware = function createMiddleware(webpackConfig) {
 
   return { devMiddleware, hotReloadMiddleware, webpackCompiler };
 };
+
+exports.reloader = reloader;
+exports.createWatcher = createWatcher;
