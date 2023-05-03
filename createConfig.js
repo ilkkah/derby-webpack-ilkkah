@@ -87,20 +87,25 @@ module.exports = function createConfig(apps, rootDir, opts = {}) {
     ].filter(Boolean)),
     resolve: {
       extensions: ['...', '.coffee', '.ts'], // .coffee and .ts last so .js files in node_modules get precedence
+      /*
+       * Polyfills for core Node libraries
+       *
+       * Without these, Webpack produces errors like `Module not found: Error: Can't resolve 'url'`.
+       * Modules with trailing slashes have the same names as Node core libs. The trailing slash
+       * causes Node to skip the usual behavior of prioritizing core modules in requires.
+       */
       fallback: {
-        // trailing slash required to indicate to lookup algorithm that this is not node core lib
         events: require.resolve('events/'),
         path: require.resolve('path-browserify'),
         process: require.resolve('process/browser'),
         racer: require.resolve('racer'),
-        // trailing slash required to indicate to lookup algorithm that this is not node core lib
         buffer: require.resolve('buffer/'),
         crypto: require.resolve('crypto-browserify'),
         http: require.resolve('stream-http'),
         https: require.resolve('https-browserify'),
         stream: require.resolve('stream-browserify'),
         os: require.resolve('os-browserify'),
-        url: require.resolve('url'),
+        url: require.resolve('url/'),
         constants: false,
         fs: false,
         zlib: false,
