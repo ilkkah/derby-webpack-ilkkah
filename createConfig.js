@@ -87,6 +87,8 @@ module.exports = function createConfig(apps, rootDir, opts = {}) {
     ].filter(Boolean)),
     resolve: {
       extensions: ['...', '.coffee', '.ts'], // .coffee and .ts last so .js files in node_modules get precedence
+      // Enable below polyfills to work when `npm link`ing libraries
+      symlinks: false,
       /*
        * Polyfills for core Node libraries
        *
