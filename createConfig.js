@@ -19,8 +19,12 @@ module.exports = function createConfig(apps, rootDir, opts = {}) {
       ...acc,
       [name]: options.hotModuleReplacement ? [
         'webpack-hot-middleware/client',
+        '@derbyjs/derby-webpack/lib/browser',
         path,
-      ] : [ path ],
+      ] : [
+        '@derbyjs/derby-webpack/lib/browser',
+        path,
+      ],
     }), {}),
     node: {
       __dirname: true,
