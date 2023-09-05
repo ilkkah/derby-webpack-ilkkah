@@ -65,7 +65,20 @@ module.exports = function createConfig(apps, rootDir, opts = {}) {
     // @TODO: evaluate other options for performance/precision for dev and static build
     devtool: 'source-map',
     module: {
-      rules: [],
+      rules: [
+        // Workaround for Webpack error when processing the async@3's ESM code dist/async.mjs:
+        // "The request 'process/browser' failed to resolve only because it was resolved as fully specified"
+        // https://github.com/webpack/webpack/issues/11467#issuecomment-691873586
+        //
+        // If the `fullySpecified: false` option is removed in the future, an alternative could be to use
+        // `resolve.mainFields` to have Webpack prefer the CommonJS versions of packages over the ESM versions.
+        {
+          test: /\.m?js/,
+          resolve: {
+            fullySpecified: false
+          }
+        }
+      ],
     },
     plugins: ([
       // order matters
